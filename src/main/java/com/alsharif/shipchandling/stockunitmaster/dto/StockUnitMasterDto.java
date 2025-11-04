@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -35,11 +36,11 @@ public class StockUnitMasterDto {
 
     private String createdBy;
 
-    private LocalDateTime createdDate;
+    private OffsetDateTime createdDate;
 
     private String lastModifiedBy;
 
-    private LocalDateTime lastModifiedDate;
+    private OffsetDateTime lastModifiedDate;
 
     private String active;
 
