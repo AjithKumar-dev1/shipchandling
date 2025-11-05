@@ -5,6 +5,7 @@ import com.alsharif.shipchandling.stockunitmaster.dto.StockUnitMasterDto;
 
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public interface StockUnitService {
 
      StockUnitMasterDto updateStockUnit(Long stockUnitPoid, StockUnitMasterDto stockUnitMasterDto);
 
-     Map<String, Object> listStockUnits(String docId, FilterRequestDto request, Pageable pageable);
+     Page<StockUnitMasterDto> listStockUnits(String docId, FilterRequestDto request, Pageable pageable);
 
      void softDeleteStockUnit(Long stockUnitPoid);
 }
