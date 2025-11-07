@@ -96,12 +96,6 @@ public class GlobalExceptionHandler {
         return ApiResponse.notFound(ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGeneralException(Exception ex, HttpServletRequest request) {
-        log.error("Unexpected error at {} ", request.getRequestURI(), ex);
-        return ApiResponse.error(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
-    }
-
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleJsonParseErrors(HttpMessageNotReadableException ex) {
         Map<String, Object> response = new HashMap<>();
@@ -117,5 +111,17 @@ public class GlobalExceptionHandler {
         String msg = "File exceeds the maximum allowed upload size. Please upload a smaller file.";
         log.warn("MaxUploadSizeExceededException: {}", ex.getMessage());
         return ApiResponse.badRequest(msg);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(Exception ex, HttpServletRequest request) {
+        log.error("Unexpected error at {} ", request.getRequestURI(), ex);
+        return ApiResponse.error(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleGeneralException(Exception ex, HttpServletRequest request) {
+        log.error("Unexpected error at {} ", request.getRequestURI(), ex);
+        return ApiResponse.error(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 }
